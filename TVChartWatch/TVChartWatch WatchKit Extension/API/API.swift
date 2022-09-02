@@ -1,13 +1,19 @@
 import Foundation
 
-enum APIError: LocalizedError {
-  case general
+enum APIError: Error, CustomStringConvertible {
+  case general(underlyingError: Error? = nil)
   case http(statusCode: Int)
 
-  var errorDescription: String? {
+  var description: String {
     switch self {
-      case .general: return "Unspecified API error"
-      case .http(let statusCode): return "API request failed with HTTP error \(statusCode)"
+      case .general(let underlyingError):
+        if let err = underlyingError {
+          return "Unspecified API error: \(String(describing: err))"
+        } else {
+          return "Unspecified API error"
+        }
+      case .http(let statusCode):
+        return "API request failed with HTTP error \(statusCode)"
     }
   }
 }
@@ -18,7 +24,7 @@ public struct API {
   public func fetchShows() async throws -> [Show] {
     let (data, rsp) = try await URLSession.shared.data(from: API.baseURL.appendingPathComponent("shows"))
     guard let hrsp = rsp as? HTTPURLResponse else {
-      throw APIError.general
+      throw APIError.general()
     }
     guard hrsp.statusCode == 200 else { throw APIError.http(statusCode: hrsp.statusCode)}
 

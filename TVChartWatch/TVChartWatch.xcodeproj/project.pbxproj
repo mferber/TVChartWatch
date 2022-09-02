@@ -21,6 +21,8 @@
 		3999487128C2651A009626B1 /* Show.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3999486C28C2651A009626B1 /* Show.swift */; };
 		3999487228C2651A009626B1 /* Marker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3999486D28C2651A009626B1 /* Marker.swift */; };
 		3999487328C2651A009626B1 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3999486F28C2651A009626B1 /* API.swift */; };
+		3999487528C273F9009626B1 /* LoadingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3999487428C273F9009626B1 /* LoadingState.swift */; };
+		3999487728C2765C009626B1 /* ShowList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3999487628C2765C009626B1 /* ShowList.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -98,6 +100,8 @@
 		3999486C28C2651A009626B1 /* Show.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Show.swift; sourceTree = "<group>"; };
 		3999486D28C2651A009626B1 /* Marker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Marker.swift; sourceTree = "<group>"; };
 		3999486F28C2651A009626B1 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		3999487428C273F9009626B1 /* LoadingState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingState.swift; sourceTree = "<group>"; };
+		3999487628C2765C009626B1 /* ShowList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowList.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -159,11 +163,12 @@
 		3999482F28C25D22009626B1 /* TVChartWatch WatchKit Extension */ = {
 			isa = PBXGroup;
 			children = (
-				3999486E28C2651A009626B1 /* API */,
-				3999486A28C2651A009626B1 /* Models */,
-				3999483028C25D22009626B1 /* ContentView.swift */,
 				3999483228C25D22009626B1 /* TVChartWatchApp.swift */,
 				3999483428C25D22009626B1 /* ComplicationController.swift */,
+				3999487B28C28731009626B1 /* Views */,
+				3999486A28C2651A009626B1 /* Models */,
+				3999486E28C2651A009626B1 /* API */,
+				3999487A28C286FE009626B1 /* Utilities */,
 				3999483628C25D23009626B1 /* Assets.xcassets */,
 				3999483B28C25D24009626B1 /* Info.plist */,
 				3999483828C25D24009626B1 /* Preview Content */,
@@ -211,6 +216,23 @@
 				3999486F28C2651A009626B1 /* API.swift */,
 			);
 			path = API;
+			sourceTree = "<group>";
+		};
+		3999487A28C286FE009626B1 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				3999487428C273F9009626B1 /* LoadingState.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		3999487B28C28731009626B1 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				3999483028C25D22009626B1 /* ContentView.swift */,
+				3999487628C2765C009626B1 /* ShowList.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -401,10 +423,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				3999483328C25D22009626B1 /* TVChartWatchApp.swift in Sources */,
+				3999487528C273F9009626B1 /* LoadingState.swift in Sources */,
 				3999483128C25D22009626B1 /* ContentView.swift in Sources */,
 				3999487128C2651A009626B1 /* Show.swift in Sources */,
 				3999483528C25D22009626B1 /* ComplicationController.swift in Sources */,
 				3999487228C2651A009626B1 /* Marker.swift in Sources */,
+				3999487728C2765C009626B1 /* ShowList.swift in Sources */,
 				3999487328C2651A009626B1 /* API.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
