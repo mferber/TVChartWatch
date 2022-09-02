@@ -6,13 +6,13 @@ struct ContentView: View {
   @State var allShows = ShowsLoadingState.uninitialized
 
   var body: some View {
-    ShowList(shows: allShows)
+    MainView(shows: allShows)
       .padding()
       .task {
         do {
           allShows.begin()
           let shows = try await API().fetchShows()
-          allShows.succeed(with: shows)
+          allShows.succeed(with: shows.filter { $0.favorite })
         } catch {
           allShows.fail(with: error)
         }
