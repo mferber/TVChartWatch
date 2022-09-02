@@ -18,6 +18,9 @@
 		3999484528C25D24009626B1 /* TVChartWatchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3999484428C25D24009626B1 /* TVChartWatchTests.swift */; };
 		3999484F28C25D24009626B1 /* TVChartWatchUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3999484E28C25D24009626B1 /* TVChartWatchUITests.swift */; };
 		3999485128C25D24009626B1 /* TVChartWatchUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3999485028C25D24009626B1 /* TVChartWatchUITestsLaunchTests.swift */; };
+		3999487128C2651A009626B1 /* Show.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3999486C28C2651A009626B1 /* Show.swift */; };
+		3999487228C2651A009626B1 /* Marker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3999486D28C2651A009626B1 /* Marker.swift */; };
+		3999487328C2651A009626B1 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3999486F28C2651A009626B1 /* API.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,6 +95,9 @@
 		3999484A28C25D24009626B1 /* TVChartWatchUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TVChartWatchUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3999484E28C25D24009626B1 /* TVChartWatchUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVChartWatchUITests.swift; sourceTree = "<group>"; };
 		3999485028C25D24009626B1 /* TVChartWatchUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVChartWatchUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		3999486C28C2651A009626B1 /* Show.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Show.swift; sourceTree = "<group>"; };
+		3999486D28C2651A009626B1 /* Marker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Marker.swift; sourceTree = "<group>"; };
+		3999486F28C2651A009626B1 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,6 +159,8 @@
 		3999482F28C25D22009626B1 /* TVChartWatch WatchKit Extension */ = {
 			isa = PBXGroup;
 			children = (
+				3999486E28C2651A009626B1 /* API */,
+				3999486A28C2651A009626B1 /* Models */,
 				3999483028C25D22009626B1 /* ContentView.swift */,
 				3999483228C25D22009626B1 /* TVChartWatchApp.swift */,
 				3999483428C25D22009626B1 /* ComplicationController.swift */,
@@ -186,6 +194,23 @@
 				3999485028C25D24009626B1 /* TVChartWatchUITestsLaunchTests.swift */,
 			);
 			path = TVChartWatchUITests;
+			sourceTree = "<group>";
+		};
+		3999486A28C2651A009626B1 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				3999486C28C2651A009626B1 /* Show.swift */,
+				3999486D28C2651A009626B1 /* Marker.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		3999486E28C2651A009626B1 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				3999486F28C2651A009626B1 /* API.swift */,
+			);
+			path = API;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -377,7 +402,10 @@
 			files = (
 				3999483328C25D22009626B1 /* TVChartWatchApp.swift in Sources */,
 				3999483128C25D22009626B1 /* ContentView.swift in Sources */,
+				3999487128C2651A009626B1 /* Show.swift in Sources */,
 				3999483528C25D22009626B1 /* ComplicationController.swift in Sources */,
+				3999487228C2651A009626B1 /* Marker.swift in Sources */,
+				3999487328C2651A009626B1 /* API.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
