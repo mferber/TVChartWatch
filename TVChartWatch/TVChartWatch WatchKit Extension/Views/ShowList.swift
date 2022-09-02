@@ -35,7 +35,7 @@ struct ShowLabel: View {
       Text(show.title).font(.headline)
       Text(progressMessage(show: show))
         .font(.footnote)
-        .foregroundColor(.yellow)
+        .foregroundColor(.accentColor)
     }
   }
 
