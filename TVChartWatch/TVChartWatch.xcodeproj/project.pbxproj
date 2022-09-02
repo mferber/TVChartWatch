@@ -206,8 +206,8 @@
 		3999486A28C2651A009626B1 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				3999486C28C2651A009626B1 /* Show.swift */,
 				3999486D28C2651A009626B1 /* Marker.swift */,
+				3999486C28C2651A009626B1 /* Show.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
