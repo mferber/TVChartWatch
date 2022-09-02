@@ -40,12 +40,30 @@ struct ShowLabel: View {
   }
 
   func progressMessage(show: Show) -> String {
-    let progress = show.seenThru
-    if progress.season <= 1 && progress.episodesWatched == 0 {
+    let season = show.seenThru.season
+    let episodesWatched = show.seenThru.episodesWatched
+
+    if season < 1 || (season == 1 && episodesWatched == 0) {
       return "Unstarted"
     }
-    let epMessage = progress.episodesWatched == 0 ? "unstarted" : "ep. \(progress.episodesWatched)"
-    return "Season \(progress.season), \(epMessage)"
+
+    let seasonMap = show.seasonMap(season: season)
+    if episodesWatched >= seasonMap.count {
+      return "Finished season \(season)"
+    }
+
+    var watchedCount = min(episodesWatched, seasonMap.count)
+    if case .special = seasonMap[watchedCount - 1] {
+      return "Season \(season), special"
+    }
+
+    // What's the episode number, skipping over any specials?
+    for ep in 1...watchedCount {
+      if case .special = seasonMap[ep - 1] {
+        watchedCount = watchedCount - 1
+      }
+    }
+    return "Season \(season), episode \(watchedCount)"
   }
 }
 
@@ -53,8 +71,10 @@ struct MainView_Previews: PreviewProvider {
   static var previews: some View {
     NavigationView {
       ShowList([
-        Show(id: 1, tvmazeId: "1", title: "Diff'rent Strokes", location: "NBC", length: "30 min", seasonMaps: ["..."], seenThru: Marker(season: 1, episodesWatched: 2), favorite: true),
-        Show(id: 2, tvmazeId: "2", title: "Doctor Who", location: "BBC", length: "1 hr", seasonMaps: [".....S", ".....S"], seenThru: Marker(season: 2, episodesWatched: 3), favorite: true)
+        Show(id: 1, tvmazeId: "1", title: "Diff'rent Strokes", location: "NBC", length: "30 min", seasonMaps: ["..."], seenThru: Marker(season: 0, episodesWatched: 2), favorite: true),
+        Show(id: 2, tvmazeId: "2", title: "Doctor Who", location: "BBC", length: "1 hr", seasonMaps: [".....S", ".....S"], seenThru: Marker(season: 1, episodesWatched: 0), favorite: true),
+        Show(id: 3, tvmazeId: "3", title: "The Leftovers", location: "Amazon", length: "1 hr", seasonMaps: ["SSS..", ".....S"], seenThru: Marker(season: 1, episodesWatched: 3), favorite: true),
+        Show(id: 4, tvmazeId: "4", title: "For All Mankind", location: "Apple TV+", length: "1 hr", seasonMaps: ["SSS.S......"], seenThru: Marker(season: 1, episodesWatched: 20), favorite: true)
       ])
     }
   }
