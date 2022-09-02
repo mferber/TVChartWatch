@@ -27,8 +27,6 @@ public struct API {
       throw APIError.general()
     }
     guard hrsp.statusCode == 200 else { throw APIError.http(statusCode: hrsp.statusCode)}
-
-    print(String(data: data, encoding: .utf8)!)
     return try JSONDecoder().decode([Show].self, from: data)
   }
 }
