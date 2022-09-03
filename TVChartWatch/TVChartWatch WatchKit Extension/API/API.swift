@@ -22,7 +22,8 @@ public struct API {
   static let baseURL = URL(string: "http://mbp2016.local:8000/")!
 
   public func fetchShows() async throws -> [Show] {
-    let (data, rsp) = try await URLSession.shared.data(from: API.baseURL.appendingPathComponent("shows"))
+    let url = URL(string: "shows", relativeTo: API.baseURL)!
+    let (data, rsp) = try await URLSession.shared.data(from: url)
     guard let hrsp = rsp as? HTTPURLResponse else {
       throw APIError.general()
     }
