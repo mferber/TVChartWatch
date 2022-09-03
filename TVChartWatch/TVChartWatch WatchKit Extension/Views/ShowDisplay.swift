@@ -36,11 +36,22 @@ private struct Season: View {
 
   var body: some View {
     let seasonMap = show.seasonMap(season: season)
-    let episodeTexts = seasonMap.map { item -> String in
+    let episodeLabels = seasonMap.map { item -> String in
       switch item {
         case .special: return "S"
         case .sequential(let number): return String(number)
         default: return ""
+      }
+    }
+
+    // compute actual episode indices into the season, skipping separators
+    var index = -1
+    let episodeIndices = seasonMap.map { item -> Int in
+      switch item {
+        case .special, .sequential:
+          index = index + 1
+          return index
+        default: return 0
       }
     }
 
@@ -56,9 +67,9 @@ private struct Season: View {
               EpisodeButton(
                 show: show,
                 season: season,
-                episodeIndex: i,
+                episodeIndex: episodeIndices[i],
                 item: item,
-                text: episodeTexts[i]
+                text: episodeLabels[i]
               )
             }
           }
@@ -76,7 +87,7 @@ private struct EpisodeButton: View {
   let text: String
 
   var body: some View {
-    NavigationLink(destination: EpisodeDetails(text: "\(show.title) \(text)")) {
+    NavigationLink(destination: EpisodeView(show: show, season: season, episodeIndex: episodeIndex)) {
       EpisodeMarker(
         seen: season < show.seenThru.season ||
           (season == show.seenThru.season && episodeIndex + 1 <= show.seenThru.episodesWatched),

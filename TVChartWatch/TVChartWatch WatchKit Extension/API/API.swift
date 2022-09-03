@@ -1,25 +1,7 @@
 import Foundation
 
-enum APIError: Error, CustomStringConvertible {
-  case general(underlyingError: Error? = nil)
-  case http(statusCode: Int)
-
-  var description: String {
-    switch self {
-      case .general(let underlyingError):
-        if let err = underlyingError {
-          return "Unspecified API error: \(String(describing: err))"
-        } else {
-          return "Unspecified API error"
-        }
-      case .http(let statusCode):
-        return "API request failed with HTTP error \(statusCode)"
-    }
-  }
-}
-
 public struct API {
-  static let baseURL = URL(string: "http://mbp2016.local:8000/")!
+  static let baseURL = URL(string: "http://mbp2012.local:8000/")!
 
   public func fetchShows() async throws -> [Show] {
     let url = URL(string: "shows", relativeTo: API.baseURL)!

@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3905672F28C3D3F000336E66 /* TVmazeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3905672E28C3D3F000336E66 /* TVmazeAPI.swift */; };
+		3905673128C3D96F00336E66 /* TVmazeEpisode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3905673028C3D96F00336E66 /* TVmazeEpisode.swift */; };
+		3905673328C3DA4900336E66 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3905673228C3DA4900336E66 /* APIError.swift */; };
+		3905673528C3DD5000336E66 /* EpisodeCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3905673428C3DD5000336E66 /* EpisodeCache.swift */; };
+		3905673728C3E28A00336E66 /* TVmazeError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3905673628C3E28A00336E66 /* TVmazeError.swift */; };
+		3905673928C3EACD00336E66 /* Episode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3905673828C3EACD00336E66 /* Episode.swift */; };
 		3938A94528C3AF9C0022ECF8 /* SeasonMapItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3938A94428C3AF9C0022ECF8 /* SeasonMapItem.swift */; };
 		3999482128C25D20009626B1 /* TVChartWatch WatchKit App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 3999482028C25D20009626B1 /* TVChartWatch WatchKit App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		3999482628C25D22009626B1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3999482528C25D22009626B1 /* Assets.xcassets */; };
@@ -86,6 +92,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3905672E28C3D3F000336E66 /* TVmazeAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVmazeAPI.swift; sourceTree = "<group>"; };
+		3905673028C3D96F00336E66 /* TVmazeEpisode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVmazeEpisode.swift; sourceTree = "<group>"; };
+		3905673228C3DA4900336E66 /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
+		3905673428C3DD5000336E66 /* EpisodeCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeCache.swift; sourceTree = "<group>"; };
+		3905673628C3E28A00336E66 /* TVmazeError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVmazeError.swift; sourceTree = "<group>"; };
+		3905673828C3EACD00336E66 /* Episode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Episode.swift; sourceTree = "<group>"; };
 		3938A94428C3AF9C0022ECF8 /* SeasonMapItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeasonMapItem.swift; sourceTree = "<group>"; };
 		3999481C28C25D20009626B1 /* TVChartWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TVChartWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3999482028C25D20009626B1 /* TVChartWatch WatchKit App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TVChartWatch WatchKit App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -137,6 +149,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3905672928C3D2DC00336E66 /* TVmaze */ = {
+			isa = PBXGroup;
+			children = (
+				3905672A28C3D30B00336E66 /* API */,
+				3905672B28C3D31700336E66 /* Models */,
+				3905673428C3DD5000336E66 /* EpisodeCache.swift */,
+			);
+			path = TVmaze;
+			sourceTree = "<group>";
+		};
+		3905672A28C3D30B00336E66 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				3905672E28C3D3F000336E66 /* TVmazeAPI.swift */,
+				3905673628C3E28A00336E66 /* TVmazeError.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		3905672B28C3D31700336E66 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				3905673028C3D96F00336E66 /* TVmazeEpisode.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		3999481528C25D1F009626B1 = {
 			isa = PBXGroup;
 			children = (
@@ -176,6 +215,7 @@
 				3999487B28C28731009626B1 /* Views */,
 				3999486A28C2651A009626B1 /* Models */,
 				3999486E28C2651A009626B1 /* API */,
+				3905672928C3D2DC00336E66 /* TVmaze */,
 				3999487A28C286FE009626B1 /* Utilities */,
 				3999483628C25D23009626B1 /* Assets.xcassets */,
 				3999483B28C25D24009626B1 /* Info.plist */,
@@ -215,6 +255,7 @@
 				3999486D28C2651A009626B1 /* Marker.swift */,
 				3938A94428C3AF9C0022ECF8 /* SeasonMapItem.swift */,
 				3999486C28C2651A009626B1 /* Show.swift */,
+				3905673828C3EACD00336E66 /* Episode.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -231,6 +272,7 @@
 			isa = PBXGroup;
 			children = (
 				3999487428C273F9009626B1 /* Loadable.swift */,
+				3905673228C3DA4900336E66 /* APIError.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -435,11 +477,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				3999483328C25D22009626B1 /* TVChartWatchApp.swift in Sources */,
+				3905672F28C3D3F000336E66 /* TVmazeAPI.swift in Sources */,
 				3999487528C273F9009626B1 /* Loadable.swift in Sources */,
 				3999487D28C289CC009626B1 /* ShowList.swift in Sources */,
 				39AC9DA628C3A7BE00AED1C2 /* EpisodeDetails.swift in Sources */,
 				3999483128C25D22009626B1 /* ContentView.swift in Sources */,
+				3905673128C3D96F00336E66 /* TVmazeEpisode.swift in Sources */,
+				3905673928C3EACD00336E66 /* Episode.swift in Sources */,
+				3905673528C3DD5000336E66 /* EpisodeCache.swift in Sources */,
 				3999487F28C2C31A009626B1 /* ShowDisplay.swift in Sources */,
+				3905673328C3DA4900336E66 /* APIError.swift in Sources */,
+				3905673728C3E28A00336E66 /* TVmazeError.swift in Sources */,
 				3999487128C2651A009626B1 /* Show.swift in Sources */,
 				3999483528C25D22009626B1 /* ComplicationController.swift in Sources */,
 				3938A94528C3AF9C0022ECF8 /* SeasonMapItem.swift in Sources */,
