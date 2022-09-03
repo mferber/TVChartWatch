@@ -1,12 +1,6 @@
 import Foundation
 
 public struct Show: Decodable {
-  public enum SeasonMapItem {
-    case sequential(Int)
-    case special
-    case separator
-  }
-
   let id: Int
   let tvmazeId: String
   let title: String

@@ -51,20 +51,46 @@ private struct Season: View {
         HStack(spacing: markerHeight / 6) {
           ForEach(Array(seasonMap.enumerated()), id: \.offset) { i, item in
             if case .separator = item {
-              Image(systemName: "plus")
-                .foregroundColor(.accentColor)
-                .font(.system(size: markerHeight * 2 / 3, weight: .bold))
+              MidseasonSeparator()
             } else {
-              EpisodeMarker(
-                seen: season < show.seenThru.season ||
-                  (season == show.seenThru.season && i + 1 <= show.seenThru.episodesWatched),
+              EpisodeButton(
+                show: show,
+                season: season,
+                episodeIndex: i,
+                item: item,
                 text: episodeTexts[i]
-              ).frame(width: markerHeight, height: markerHeight)
+              )
             }
           }
         }
       }
     }
+  }
+}
+
+private struct EpisodeButton: View {
+  let show: Show
+  let season: Int
+  let episodeIndex: Int
+  let item: SeasonMapItem
+  let text: String
+
+  var body: some View {
+    NavigationLink(destination: EpisodeDetails(text: "\(show.title) \(text)")) {
+      EpisodeMarker(
+        seen: season < show.seenThru.season ||
+          (season == show.seenThru.season && episodeIndex + 1 <= show.seenThru.episodesWatched),
+        text: text
+      ).frame(width: markerHeight, height: markerHeight)
+    }.buttonStyle(.plain)
+  }
+}
+
+private struct MidseasonSeparator: View {
+  var body: some View {
+    Image(systemName: "plus")
+      .foregroundColor(.accentColor)
+      .font(.system(size: markerHeight * 2 / 3, weight: .bold))
   }
 }
 

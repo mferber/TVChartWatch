@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3938A94528C3AF9C0022ECF8 /* SeasonMapItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3938A94428C3AF9C0022ECF8 /* SeasonMapItem.swift */; };
 		3999482128C25D20009626B1 /* TVChartWatch WatchKit App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 3999482028C25D20009626B1 /* TVChartWatch WatchKit App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		3999482628C25D22009626B1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3999482528C25D22009626B1 /* Assets.xcassets */; };
 		3999482C28C25D22009626B1 /* TVChartWatch WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 3999482B28C25D22009626B1 /* TVChartWatch WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -25,6 +26,7 @@
 		3999487728C2765C009626B1 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3999487628C2765C009626B1 /* MainView.swift */; };
 		3999487D28C289CC009626B1 /* ShowList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3999487C28C289CC009626B1 /* ShowList.swift */; };
 		3999487F28C2C31A009626B1 /* ShowDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3999487E28C2C31A009626B1 /* ShowDisplay.swift */; };
+		39AC9DA628C3A7BE00AED1C2 /* EpisodeDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39AC9DA528C3A7BE00AED1C2 /* EpisodeDetails.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,6 +86,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3938A94428C3AF9C0022ECF8 /* SeasonMapItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeasonMapItem.swift; sourceTree = "<group>"; };
 		3999481C28C25D20009626B1 /* TVChartWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TVChartWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3999482028C25D20009626B1 /* TVChartWatch WatchKit App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TVChartWatch WatchKit App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3999482528C25D22009626B1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -106,6 +109,7 @@
 		3999487628C2765C009626B1 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		3999487C28C289CC009626B1 /* ShowList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowList.swift; sourceTree = "<group>"; };
 		3999487E28C2C31A009626B1 /* ShowDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowDisplay.swift; sourceTree = "<group>"; };
+		39AC9DA528C3A7BE00AED1C2 /* EpisodeDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeDetails.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -209,6 +213,7 @@
 			isa = PBXGroup;
 			children = (
 				3999486D28C2651A009626B1 /* Marker.swift */,
+				3938A94428C3AF9C0022ECF8 /* SeasonMapItem.swift */,
 				3999486C28C2651A009626B1 /* Show.swift */,
 			);
 			path = Models;
@@ -237,6 +242,7 @@
 				3999487628C2765C009626B1 /* MainView.swift */,
 				3999487C28C289CC009626B1 /* ShowList.swift */,
 				3999487E28C2C31A009626B1 /* ShowDisplay.swift */,
+				39AC9DA528C3A7BE00AED1C2 /* EpisodeDetails.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -431,10 +437,12 @@
 				3999483328C25D22009626B1 /* TVChartWatchApp.swift in Sources */,
 				3999487528C273F9009626B1 /* LoadingState.swift in Sources */,
 				3999487D28C289CC009626B1 /* ShowList.swift in Sources */,
+				39AC9DA628C3A7BE00AED1C2 /* EpisodeDetails.swift in Sources */,
 				3999483128C25D22009626B1 /* ContentView.swift in Sources */,
 				3999487F28C2C31A009626B1 /* ShowDisplay.swift in Sources */,
 				3999487128C2651A009626B1 /* Show.swift in Sources */,
 				3999483528C25D22009626B1 /* ComplicationController.swift in Sources */,
+				3938A94528C3AF9C0022ECF8 /* SeasonMapItem.swift in Sources */,
 				3999487228C2651A009626B1 /* Marker.swift in Sources */,
 				3999487728C2765C009626B1 /* MainView.swift in Sources */,
 				3999487328C2651A009626B1 /* API.swift in Sources */,
