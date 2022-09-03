@@ -1,19 +1,13 @@
 import SwiftUI
 
-typealias ShowsLoadingState = LoadingState<[Show]>
-
 struct ContentView: View {
-  @State var allShows = ShowsLoadingState.uninitialized
+  @StateObject var allShows = Loadable<[Show]>()
 
   var body: some View {
     MainView(shows: allShows)
       .task {
-        do {
-          allShows.begin()
-          let shows = try await API().fetchShows()
-          allShows.succeed(with: shows.filter { $0.favorite })
-        } catch {
-          allShows.fail(with: error)
+        await allShows.load {
+          try await API().fetchShows()
         }
       }
   }

@@ -1,11 +1,11 @@
 import SwiftUI
 
 struct MainView: View {
-  let shows: ShowsLoadingState
+  @ObservedObject var shows: Loadable<[Show]>
 
   @ViewBuilder
   var body: some View {
-    switch shows {
+    switch shows.status {
       case .uninitialized:
         ProgressView()
       case .inProgress:

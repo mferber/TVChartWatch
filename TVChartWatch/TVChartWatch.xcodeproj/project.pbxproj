@@ -22,7 +22,7 @@
 		3999487128C2651A009626B1 /* Show.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3999486C28C2651A009626B1 /* Show.swift */; };
 		3999487228C2651A009626B1 /* Marker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3999486D28C2651A009626B1 /* Marker.swift */; };
 		3999487328C2651A009626B1 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3999486F28C2651A009626B1 /* API.swift */; };
-		3999487528C273F9009626B1 /* LoadingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3999487428C273F9009626B1 /* LoadingState.swift */; };
+		3999487528C273F9009626B1 /* Loadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3999487428C273F9009626B1 /* Loadable.swift */; };
 		3999487728C2765C009626B1 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3999487628C2765C009626B1 /* MainView.swift */; };
 		3999487D28C289CC009626B1 /* ShowList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3999487C28C289CC009626B1 /* ShowList.swift */; };
 		3999487F28C2C31A009626B1 /* ShowDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3999487E28C2C31A009626B1 /* ShowDisplay.swift */; };
@@ -105,7 +105,7 @@
 		3999486C28C2651A009626B1 /* Show.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Show.swift; sourceTree = "<group>"; };
 		3999486D28C2651A009626B1 /* Marker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Marker.swift; sourceTree = "<group>"; };
 		3999486F28C2651A009626B1 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
-		3999487428C273F9009626B1 /* LoadingState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingState.swift; sourceTree = "<group>"; };
+		3999487428C273F9009626B1 /* Loadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loadable.swift; sourceTree = "<group>"; };
 		3999487628C2765C009626B1 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		3999487C28C289CC009626B1 /* ShowList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowList.swift; sourceTree = "<group>"; };
 		3999487E28C2C31A009626B1 /* ShowDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowDisplay.swift; sourceTree = "<group>"; };
@@ -230,7 +230,7 @@
 		3999487A28C286FE009626B1 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				3999487428C273F9009626B1 /* LoadingState.swift */,
+				3999487428C273F9009626B1 /* Loadable.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -435,7 +435,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3999483328C25D22009626B1 /* TVChartWatchApp.swift in Sources */,
-				3999487528C273F9009626B1 /* LoadingState.swift in Sources */,
+				3999487528C273F9009626B1 /* Loadable.swift in Sources */,
 				3999487D28C289CC009626B1 /* ShowList.swift in Sources */,
 				39AC9DA628C3A7BE00AED1C2 /* EpisodeDetails.swift in Sources */,
 				3999483128C25D22009626B1 /* ContentView.swift in Sources */,
