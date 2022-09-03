@@ -53,7 +53,7 @@ private struct Season: View {
             if case .separator = item {
               Image(systemName: "plus")
                 .foregroundColor(.accentColor)
-                .frame(width: markerHeight / 2, height: markerHeight / 2)
+                .font(.system(size: markerHeight * 2 / 3, weight: .bold))
             } else {
               EpisodeMarker(
                 seen: season < show.seenThru.season ||
