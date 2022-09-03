@@ -7,7 +7,6 @@ struct ContentView: View {
 
   var body: some View {
     MainView(shows: allShows)
-      .padding()
       .task {
         do {
           allShows.begin()
