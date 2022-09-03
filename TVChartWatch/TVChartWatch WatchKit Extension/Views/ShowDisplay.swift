@@ -1,7 +1,7 @@
 import SwiftUI
 
 // TODO: make this @State and control with digital crown
-private let markerHeight: CGFloat = 24
+private let markerHeight: CGFloat = 12
 
 struct ShowDisplay: View {
   let show: Show
