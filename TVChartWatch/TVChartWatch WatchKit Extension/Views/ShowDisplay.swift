@@ -1,7 +1,7 @@
 import SwiftUI
 
 // TODO: make this @State and control with digital crown
-private let markerHeight: CGFloat = 12
+private let markerHeight: CGFloat = 22
 
 struct ShowDisplay: View {
   let show: Show
@@ -36,6 +36,13 @@ private struct Season: View {
 
   var body: some View {
     let seasonMap = show.seasonMap(season: season)
+    let episodeTexts = seasonMap.map { item -> String in
+      switch item {
+        case .special: return "S"
+        case .sequential(let number): return String(number)
+        default: return ""
+      }
+    }
 
     VStack(alignment: .leading, spacing: 4) {
       Text("Season \(season)").font(.footnote)
@@ -50,7 +57,8 @@ private struct Season: View {
             } else {
               EpisodeMarker(
                 seen: season < show.seenThru.season ||
-                  (season == show.seenThru.season && i + 1 <= show.seenThru.episodesWatched)
+                  (season == show.seenThru.season && i + 1 <= show.seenThru.episodesWatched),
+                text: episodeTexts[i]
               ).frame(width: markerHeight, height: markerHeight)
             }
           }
@@ -62,13 +70,19 @@ private struct Season: View {
 
 private struct EpisodeMarker: View {
   let seen: Bool
+  let text: String
 
   var body: some View {
-    if seen {
-      Circle()
-        .fill(Color.accentColor)
-    } else {
-      Circle().strokeBorder(Color.accentColor, lineWidth: markerHeight / 10)
+    ZStack {
+      if seen {
+        Circle().fill(Color.accentColor)
+      } else {
+        Circle().strokeBorder(Color.accentColor, lineWidth: markerHeight / 10)
+      }
+      Text(text)
+        .font(.system(size: markerHeight * 0.6))
+        .bold()
+        .foregroundColor(seen ? .black : .white)
     }
   }
 }
