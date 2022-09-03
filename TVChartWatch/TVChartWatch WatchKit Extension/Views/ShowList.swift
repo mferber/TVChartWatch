@@ -11,7 +11,7 @@ struct ShowList: View {
     List {
       ForEach(shows, id: \.id) { show in
         NavigationLink(
-          destination: Text(show.title)
+          destination: ShowDisplay(show: show)
             .navigationTitle("Shows")
         ) {
           ShowLabel(show)
@@ -47,7 +47,9 @@ struct ShowLabel: View {
       return "Unstarted"
     }
 
-    let seasonMap = show.seasonMap(season: season)
+    let seasonMap = show.seasonMap(season: season).filter {
+      if case .separator = $0 { return false } else { return true }
+    }
     if episodesWatched >= seasonMap.count {
       return "Finished season \(season)"
     }
@@ -73,7 +75,7 @@ struct MainView_Previews: PreviewProvider {
       ShowList([
         Show(id: 1, tvmazeId: "1", title: "Diff'rent Strokes", location: "NBC", length: "30 min", seasonMaps: ["..."], seenThru: Marker(season: 0, episodesWatched: 2), favorite: true),
         Show(id: 2, tvmazeId: "2", title: "Doctor Who", location: "BBC", length: "1 hr", seasonMaps: [".....S", ".....S"], seenThru: Marker(season: 1, episodesWatched: 0), favorite: true),
-        Show(id: 3, tvmazeId: "3", title: "The Leftovers", location: "Amazon", length: "1 hr", seasonMaps: ["SSS..", ".....S"], seenThru: Marker(season: 1, episodesWatched: 3), favorite: true),
+        Show(id: 3, tvmazeId: "3", title: "The Leftovers", location: "Amazon", length: "1 hr", seasonMaps: ["SS+S...+.", ".....S"], seenThru: Marker(season: 1, episodesWatched: 4), favorite: true),
         Show(id: 4, tvmazeId: "4", title: "For All Mankind", location: "Apple TV+", length: "1 hr", seasonMaps: ["SSS.S......"], seenThru: Marker(season: 1, episodesWatched: 20), favorite: true)
       ])
     }

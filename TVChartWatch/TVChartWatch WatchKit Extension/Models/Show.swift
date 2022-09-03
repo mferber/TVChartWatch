@@ -1,9 +1,10 @@
 import Foundation
 
 public struct Show: Decodable {
-  public enum EpisodeInfo {
-    case special
+  public enum SeasonMapItem {
     case sequential(Int)
+    case special
+    case separator
   }
 
   let id: Int
@@ -15,8 +16,8 @@ public struct Show: Decodable {
   let seenThru: Marker
   let favorite: Bool
 
-  public func seasonMap(season: Int) -> [EpisodeInfo] {
-    var result = [EpisodeInfo]()
+  public func seasonMap(season: Int) -> [SeasonMapItem] {
+    var result = [SeasonMapItem]()
     let strMap = seasonMaps[season - 1]
     var epCounter = 0
     for ch in strMap {
@@ -26,8 +27,9 @@ public struct Show: Decodable {
           result.append(.sequential(epCounter))
         case "S":
           result.append(.special)
+        case "+":
+          result.append(.separator)
         default:
-          // + divider or unrecognized char doesn't count as an episode
           break
       }
     }
