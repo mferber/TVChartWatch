@@ -25,3 +25,19 @@ public struct Show {
     return seenThru.episodesWatched >= length(ofSeason: season)
   }
 }
+
+extension Array where Element == Show {
+  func sortedByTitle() -> [Show] {
+    let mapped = self
+      .map { show -> (String, Show) in
+        let fixedTitle = show.title.replacingOccurrences(
+          of: "^(a|an|the)\\b", with: "",
+          options: [.regularExpression, .caseInsensitive]
+        )
+        return (fixedTitle, show)
+      }
+    let sorted = mapped.sorted { $0.0 < $1.0 }
+    let mappedBack = sorted.map { $0.1 }
+    return mappedBack
+  }
+}

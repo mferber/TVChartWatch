@@ -7,7 +7,7 @@ struct MainView: View {
   var body: some View {
     switch shows.status {
       case .uninitialized, .inProgress: ProgressView()
-      case .success(let shows): ShowList(shows)
+      case .success(let shows): ShowList(shows.sortedByTitle())
       case .failure(let err): Text("Error: \(String(describing: err))")
     }
   }
