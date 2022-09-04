@@ -31,12 +31,19 @@ struct TVmazeAPI {
         result.append([])
       }
 
+      let length: String?
+      if let runtime = ep.runtime {
+        length = "\(runtime) min."
+      } else {
+        length = nil
+      }
+
       result[ep.season - 1].append(
         Episode(
           tvmazeId: String(ep.id),
           number: ep.number,
           title: ep.name,
-          length: "\(ep.runtime) min.",
+          length: length,
           synopsis: ep.summary?.replacingOccurrences(of: "<.*?>", with: "", options: .regularExpression)
         )
       )

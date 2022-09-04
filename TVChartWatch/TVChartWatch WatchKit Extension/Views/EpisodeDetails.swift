@@ -48,16 +48,20 @@ private struct EpisodeDetails: View {
 
   var body: some View {
     ScrollView(.vertical) {
-      VStack(alignment: .leading) {
-        Text(episode.title).font(.headline)
-        Text(episodeDescriptor).font(.subheadline)
+      VStack(alignment: .leading, spacing: 10) {
+        VStack(alignment: .leading) {
+          Text(episode.title).font(.title3)
+          Text(episodeDescriptor).font(.footnote)
+        }
         Button("Mark watched", action: {})
 
-        if let synopsis = episode.synopsis {
-          Text(synopsis)
-        } else {
-          Text(missingSynopsisText).italic()
-        }
+        Group {
+          if let synopsis = episode.synopsis {
+            Text(synopsis)
+          } else {
+            Text(missingSynopsisText).italic()
+          }
+        }.font(.caption2)
       }
     }
   }
@@ -65,10 +69,18 @@ private struct EpisodeDetails: View {
   var episodeDescriptor: String {
     let epId: String
     if let number = episode.number {
-      epId = "episode \(number)"
+      epId = "E\(number)"
     } else {
-      epId = "special"
+      epId = " Special"
     }
-    return "Season \(season), \(epId)"
+
+    let epLength: String
+    if let length = episode.length {
+      epLength = "(\(length))"
+    } else {
+      epLength = ""
+    }
+
+    return "S\(season)\(epId) \(epLength)"
   }
 }
