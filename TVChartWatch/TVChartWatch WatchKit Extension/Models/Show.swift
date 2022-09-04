@@ -29,4 +29,24 @@ public struct Show: Decodable {
     }
     return result
   }
+
+  public func length(ofSeason season: Int) -> Int {
+    let chars = seasonMaps[season - 1]
+    let result = chars.reduce(into: 0) { sum, ch in
+      if (ch == "S" || ch == ".") {
+        sum = sum + 1
+      }
+    }
+    return result
+  }
+
+  public func hasCompleted(season: Int) -> Bool {
+    if seenThru.season < season {
+      return false
+    }
+    if seenThru.season > season {
+      return true
+    }
+    return seenThru.episodesWatched >= length(ofSeason: season)
+  }
 }

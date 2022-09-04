@@ -56,7 +56,12 @@ private struct Season: View {
     }
 
     VStack(alignment: .leading, spacing: 4) {
-      Text("Season \(season)").font(.footnote)
+      HStack {
+        if show.hasCompleted(season: season) {
+          Image(systemName: "checkmark")
+        }
+        Text("Season \(season)")
+      }.font(.footnote)
 
       ScrollView(.horizontal, showsIndicators: false) {
         HStack(spacing: markerHeight / 6) {
