@@ -6,6 +6,6 @@ struct TVmazeEpisode: Decodable {
   let number: Int?
   let type: String
   let name: String
-  let runtime: Int
+  let runtime: Int?
   let summary: String?
 }
