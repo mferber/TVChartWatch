@@ -35,11 +35,11 @@ private struct Season: View {
   let season: Int
 
   var body: some View {
-    let seasonMap = show.seasonMap(season: season)
+    let seasonMap = show.seasonMaps[season - 1]
     let episodeLabels = seasonMap.map { item -> String? in
       switch item {
         case .special: return nil
-        case .sequential(let number): return String(number)
+        case .numbered(let number): return String(number)
         default: return ""
       }
     }
@@ -48,7 +48,7 @@ private struct Season: View {
     var index = -1
     let episodeIndices = seasonMap.map { item -> Int in
       switch item {
-        case .special, .sequential:
+        case .special, .numbered:
           index = index + 1
           return index
         default: return 0
@@ -88,7 +88,7 @@ private struct EpisodeButton: View {
   let show: Show
   let season: Int
   let episodeIndex: Int
-  let item: SeasonMapItem
+  let item: EpisodeType
   let text: String?  // nil indicates an unnumbered special episode
 
   var body: some View {
@@ -138,7 +138,7 @@ private struct EpisodeMarker: View {
 
 struct ShowDisplay_Previews: PreviewProvider {
   static var previews: some View {
-    let show = Show(
+    let show = CodableShow(
       id: 2,
       tvmazeId: "618",
       title:"Battlestar Galactica",
@@ -164,7 +164,8 @@ struct ShowDisplay_Previews: PreviewProvider {
         episodesWatched: 5
       ),
       favorite: true
-    );
+    ).asShow()
+    
     ShowDisplay(show: show)
   }
 }
