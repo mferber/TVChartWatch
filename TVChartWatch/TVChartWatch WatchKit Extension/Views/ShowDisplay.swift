@@ -40,20 +40,9 @@ private struct Season: View {
       switch item {
         case .special: return nil
         case .numbered(let number): return String(number)
-        default: return ""
       }
     }
-
-    // compute actual episode indices into the season, skipping separators
-    var index = -1
-    let episodeIndices = seasonMap.map { item -> Int in
-      switch item {
-        case .special, .numbered:
-          index = index + 1
-          return index
-        default: return 0
-      }
-    }
+    let separatorIndices = show.seasonSeparatorIndices[season - 1]
 
     VStack(alignment: .leading, spacing: 4) {
       HStack {
@@ -65,18 +54,17 @@ private struct Season: View {
 
       ScrollView(.horizontal, showsIndicators: false) {
         HStack(spacing: markerHeight / 6) {
-          ForEach(Array(seasonMap.enumerated()), id: \.offset) { i, item in
-            if case .separator = item {
+          ForEach(Array(seasonMap.enumerated()), id: \.offset) { idx, item in
+            if separatorIndices.contains(idx) {
               MidseasonSeparator()
-            } else {
-              EpisodeButton(
-                show: show,
-                season: season,
-                episodeIndex: episodeIndices[i],
-                item: item,
-                text: episodeLabels[i]
-              )
             }
+            EpisodeButton(
+              show: show,
+              season: season,
+              episodeIndex: idx,
+              item: item,
+              text: episodeLabels[idx]
+            )
           }
         }
       }
