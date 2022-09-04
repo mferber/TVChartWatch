@@ -8,7 +8,7 @@ struct ShowDisplay: View {
 
   var body: some View {
     VStack(alignment: .leading) {
-      Text(show.title).font(.headline)
+      Text(show.title).font(.title3)
       ScrollView(.vertical, showsIndicators: true) {
         VStack(alignment: .leading, spacing: 10) {
           EpisodeChart(show: show)
