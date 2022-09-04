@@ -16,7 +16,7 @@ public class Loadable<T>: ObservableObject {
         case .uninitialized: return true
         default: return false
       }
-    }(), "Loadable.load() called multiple times")
+    }(), "Loadable.load() called multiple times on same instance")
 
     status = .inProgress
 

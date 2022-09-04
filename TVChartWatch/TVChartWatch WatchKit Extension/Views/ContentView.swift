@@ -6,6 +6,7 @@ struct ContentView: View {
   var body: some View {
     MainView(shows: allShows)
       .task {
+        guard case .uninitialized = allShows.status else { return }
         await allShows.load {
           try await API().fetchShows()
         }
