@@ -36,9 +36,9 @@ private struct Season: View {
 
   var body: some View {
     let seasonMap = show.seasonMap(season: season)
-    let episodeLabels = seasonMap.map { item -> String in
+    let episodeLabels = seasonMap.map { item -> String? in
       switch item {
-        case .special: return "S"
+        case .special: return nil
         case .sequential(let number): return String(number)
         default: return ""
       }
@@ -84,7 +84,7 @@ private struct EpisodeButton: View {
   let season: Int
   let episodeIndex: Int
   let item: SeasonMapItem
-  let text: String
+  let text: String?  // nil indicates an unnumbered special episode
 
   var body: some View {
     NavigationLink(destination: EpisodeView(show: show, season: season, episodeIndex: episodeIndex)) {
@@ -107,7 +107,7 @@ private struct MidseasonSeparator: View {
 
 private struct EpisodeMarker: View {
   let seen: Bool
-  let text: String
+  let text: String?
 
   var body: some View {
     ZStack {
@@ -116,10 +116,17 @@ private struct EpisodeMarker: View {
       } else {
         Circle().strokeBorder(Color.accentColor, lineWidth: markerHeight / 10)
       }
-      Text(text)
-        .font(.system(size: markerHeight * 0.6))
-        .bold()
-        .foregroundColor(seen ? .black : .white)
+      if let text = text {
+        Text(text)
+          .font(.system(size: markerHeight * 0.6))
+          .fontWeight(seen ? .bold : .regular)
+          .foregroundColor(seen ? .black : .white)
+      } else {
+        // special episode: mark with a star
+        Image(systemName: "star.fill")
+          .font(.system(size: markerHeight * 0.6))
+          .foregroundColor(seen ? .black : .white)
+      }
     }
   }
 }
