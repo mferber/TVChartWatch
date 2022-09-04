@@ -34,5 +34,6 @@ public class Loadable<T>: ObservableObject {
 
   private func fail(with error: Error) {
     status = .failure(error)
+    print(error)
   }
 }

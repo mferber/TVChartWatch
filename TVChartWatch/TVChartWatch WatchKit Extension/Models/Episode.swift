@@ -5,5 +5,5 @@ struct Episode {
   let number: Int?
   let title: String
   let length: String
-  let synopsis: String
+  let synopsis: String?
 }

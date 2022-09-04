@@ -1,5 +1,7 @@
 import SwiftUI
 
+let missingSynopsisText = "No episode synopsis is currently available."
+
 struct EpisodeView: View {
   let show: Show
   let season: Int
@@ -50,7 +52,12 @@ private struct EpisodeDetails: View {
         Text(episode.title).font(.headline)
         Text(episodeDescriptor).font(.subheadline)
         Button("Mark watched", action: {})
-        Text(episode.synopsis)
+
+        if let synopsis = episode.synopsis {
+          Text(synopsis)
+        } else {
+          Text(missingSynopsisText).italic()
+        }
       }
     }
   }

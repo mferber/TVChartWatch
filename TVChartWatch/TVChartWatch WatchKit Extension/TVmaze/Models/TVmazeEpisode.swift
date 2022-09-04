@@ -7,5 +7,5 @@ struct TVmazeEpisode: Decodable {
   let type: String
   let name: String
   let runtime: Int
-  let summary: String
+  let summary: String?
 }

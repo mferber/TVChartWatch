@@ -14,7 +14,9 @@ struct TVmazeAPI {
     guard let hrsp = rsp as? HTTPURLResponse else {
       throw APIError.general()
     }
-    guard hrsp.statusCode == 200 else { throw APIError.http(statusCode: hrsp.statusCode)}
+    guard hrsp.statusCode == 200 else {
+      throw APIError.http(statusCode: hrsp.statusCode)
+    }
     let rawEpisodes = try JSONDecoder().decode([TVmazeEpisode].self, from: data)
     return compileSeasonLists(tvmazeEpisodes: rawEpisodes)
   }
@@ -35,7 +37,7 @@ struct TVmazeAPI {
           number: ep.number,
           title: ep.name,
           length: "\(ep.runtime) min.",
-          synopsis: ep.summary.replacingOccurrences(of: "<.*?>", with: "", options: .regularExpression)
+          synopsis: ep.summary?.replacingOccurrences(of: "<.*?>", with: "", options: .regularExpression)
         )
       )
     }
