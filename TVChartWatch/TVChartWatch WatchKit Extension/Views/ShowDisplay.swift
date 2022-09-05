@@ -103,22 +103,27 @@ private struct EpisodeMarker: View {
   let text: String?
 
   var body: some View {
+    let markerShape = RoundedRectangle(
+      cornerRadius: markerHeight / 3,
+      style: .continuous
+    )
+
     ZStack {
       if seen {
-        Circle().fill(Color.accentColor)
+        markerShape.fill(Color.accentColor)
       } else {
-        Circle().strokeBorder(Color.accentColor, lineWidth: markerHeight / 10)
+        markerShape.strokeBorder(Color.accentColor, lineWidth: markerHeight / 20)
       }
       if let text = text {
         Text(text)
           .font(.system(size: markerHeight * 0.6))
           .fontWeight(seen ? .bold : .regular)
-          .foregroundColor(seen ? .black : .white)
+          .foregroundColor(seen ? .black : .accentColor)
       } else {
         // special episode: mark with a star
         Image(systemName: "star.fill")
           .font(.system(size: markerHeight * 0.6))
-          .foregroundColor(seen ? .black : .white)
+          .foregroundColor(seen ? .black : .accentColor)
       }
     }
   }
