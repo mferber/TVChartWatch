@@ -16,7 +16,7 @@ struct EpisodeView: View {
 
         // TODO: include season in Episode?
         case .success(let episode): EpisodeDetails(episode: episode, season: season)
-        case .failure(let error): Text(String(describing: error))
+        case .failure(let error): displayError(error)
       }
     }
     .navigationTitle(show.title)
@@ -39,6 +39,24 @@ struct EpisodeView: View {
       EpisodeCache.instance.store(tvmazeShowId: show.tvmazeId, episodes: episodes)
     }
     return episodes!
+  }
+
+  func displayError(_ error: Error) -> some View {
+    switch error {
+      case TVmazeError.episodeOutOfRange:
+        return AnyView(
+          Text("No information is currently available for this episode.")
+            .font(.body)
+            .italic()
+          )
+      default:
+        return AnyView(
+          VStack(alignment: .leading, spacing: 20) {
+            Text("Something went wrong").font(.body).italic()
+            Text(String(describing: error)).font(.footnote)
+          }
+        )
+    }
   }
 }
 
