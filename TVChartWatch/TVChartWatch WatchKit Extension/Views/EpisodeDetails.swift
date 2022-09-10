@@ -10,12 +10,14 @@ struct EpisodeView: View {
   @StateObject private var episodeInfo = Loadable<Episode>()
 
   var body: some View {
+    let watched = show.isSeen(season: season, episodeIndex: episodeIndex)
+
     Group {
       switch episodeInfo.status {
         case .uninitialized, .inProgress: ProgressView()
 
         // TODO: include season in Episode?
-        case .success(let episode): EpisodeDetails(episode: episode, season: season)
+        case .success(let episode): EpisodeDetails(episode: episode, season: season, watched: watched)
         case .failure(let error): displayError(error)
       }
     }
@@ -63,6 +65,7 @@ struct EpisodeView: View {
 private struct EpisodeDetails: View {
   let episode: Episode
   let season: Int
+  let watched: Bool
 
   var body: some View {
     ScrollView(.vertical) {
@@ -71,7 +74,14 @@ private struct EpisodeDetails: View {
           Text(episode.title).font(.title3)
           Text(episodeDescriptor).font(.footnote)
         }
-        Button("Mark watched", action: {})
+        Button(action: { }) {
+          HStack {
+            if watched {
+              Image(systemName: "checkmark")
+            }
+            Text("Mark watched")
+          }
+        }
 
         Group {
           if let synopsis = episode.synopsis {

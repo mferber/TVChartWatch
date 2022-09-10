@@ -15,6 +15,20 @@ public struct Show {
     return seasonMaps[season - 1].count
   }
 
+  public func isSeen(season: Int, episodeIndex: Int) -> Bool {
+    if !seasonMaps.indices.contains(season) ||
+        !seasonMaps[season - 1].indices.contains(episodeIndex){
+      return false
+    }
+    if seenThru.season < season {
+      return false
+    }
+    if seenThru.season > season {
+      return true
+    }
+    return seenThru.episodesWatched > episodeIndex
+  }
+
   public func hasCompleted(season: Int) -> Bool {
     if seenThru.season < season {
       return false
