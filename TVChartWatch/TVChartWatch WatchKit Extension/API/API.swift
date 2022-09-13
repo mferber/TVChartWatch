@@ -1,7 +1,7 @@
 import Foundation
 
 public struct API {
-  static let baseURL = URL(string: "http://mbp2012.local:8000/")!
+  static let baseURL = URL(string: "http://taskmaster.local:8000/")!
 
   public func fetchShows() async throws -> [Show] {
     let url = URL(string: "shows", relativeTo: API.baseURL)!
