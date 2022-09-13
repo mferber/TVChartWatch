@@ -47,7 +47,7 @@ extension Array where Element == Show {
         let fixedTitle = show.title.replacingOccurrences(
           of: "^(a|an|the)\\b", with: "",
           options: [.regularExpression, .caseInsensitive]
-        )
+        ).trimmingCharacters(in: .whitespacesAndNewlines)
         return (fixedTitle, show)
       }
     let sorted = mapped.sorted { $0.0 < $1.0 }
