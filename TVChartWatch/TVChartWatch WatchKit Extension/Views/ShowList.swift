@@ -1,17 +1,13 @@
 import SwiftUI
 
 struct ShowList: View {
-  let shows: [Show]
-
-  init(_ shows: [Show]) {
-    self.shows = shows
-  }
+  @Binding var shows: [Show]
 
   var body: some View {
     List {
-      ForEach(shows, id: \.id) { show in
+      ForEach($shows, id: \.id) { $show in
         NavigationLink(
-          destination: ShowDisplay(show: show)
+          destination: ShowDisplay(show: $show)
             .navigationTitle("Shows")
         ) {
           ShowLabel(show)
@@ -85,7 +81,7 @@ struct MainView_Previews: PreviewProvider {
     ].map { $0.asShow() }
 
     NavigationView {
-      ShowList(shows)
+      ShowList(shows: .constant(shows))
     }
   }
 }

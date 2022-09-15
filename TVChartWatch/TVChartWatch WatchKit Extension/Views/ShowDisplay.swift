@@ -4,14 +4,14 @@ import SwiftUI
 private let markerHeight: CGFloat = 22
 
 struct ShowDisplay: View {
-  let show: Show
+  @Binding var show: Show
 
   var body: some View {
     VStack(alignment: .leading) {
       Text(show.title).font(.title3)
       ScrollView(.vertical, showsIndicators: true) {
         VStack(alignment: .leading, spacing: 10) {
-          EpisodeChart(show: show)
+          EpisodeChart(show: $show)
         }
       }
     }
@@ -19,19 +19,19 @@ struct ShowDisplay: View {
 }
 
 private struct EpisodeChart: View {
-  let show: Show
+  @Binding var show: Show
 
   var body: some View {
     VStack(alignment: .leading, spacing: markerHeight / 3) {
       ForEach(1...show.seasonMaps.count, id: \.self) { i in
-        Season(show: show, season: i)
+        Season(show: $show, season: i)
       }
     }
   }
 }
 
 private struct Season: View {
-  let show: Show
+  @Binding var show: Show
   let season: Int
 
   var body: some View {
@@ -59,7 +59,7 @@ private struct Season: View {
               MidseasonSeparator()
             }
             EpisodeButton(
-              show: show,
+              show: $show,
               season: season,
               episodeIndex: idx,
               item: item,
@@ -73,14 +73,14 @@ private struct Season: View {
 }
 
 private struct EpisodeButton: View {
-  let show: Show
+  @Binding var show: Show
   let season: Int
   let episodeIndex: Int
   let item: EpisodeType
   let text: String?  // nil indicates an unnumbered special episode
 
   var body: some View {
-    NavigationLink(destination: EpisodeView(show: show, season: season, episodeIndex: episodeIndex)) {
+    NavigationLink(destination: EpisodeView(show: $show, season: season, episodeIndex: episodeIndex)) {
       EpisodeMarker(
         seen: season < show.seenThru.season ||
           (season == show.seenThru.season && episodeIndex + 1 <= show.seenThru.episodesWatched),
@@ -159,6 +159,6 @@ struct ShowDisplay_Previews: PreviewProvider {
       favorite: true
     ).asShow()
     
-    ShowDisplay(show: show)
+    ShowDisplay(show: .constant(show))
   }
 }

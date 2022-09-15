@@ -3,7 +3,7 @@ import SwiftUI
 let missingSynopsisText = "No episode synopsis is currently available."
 
 struct EpisodeView: View {
-  let show: Show
+  @Binding var show: Show
   let season: Int
   let episodeIndex: Int
 

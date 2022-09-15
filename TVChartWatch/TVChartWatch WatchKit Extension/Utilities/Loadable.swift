@@ -1,11 +1,20 @@
 import SwiftUI
 
 public class Loadable<T>: ObservableObject {
-  public enum LoadStatus {
+  public enum LoadStatus: CustomStringConvertible {
     case uninitialized
     case inProgress
     case success(_ value: T)
     case failure(_ error: Error)
+
+    public var description: String {
+      switch self {
+        case .uninitialized: return "uninitialized"
+        case .inProgress: return "inProgress"
+        case .success: return "success"
+        case .failure: return "failure"
+      }
+    }
   }
 
   @Published public private(set) var status = LoadStatus.uninitialized
@@ -18,12 +27,15 @@ public class Loadable<T>: ObservableObject {
       }
     }(), "Loadable.load() called multiple times on same instance")
 
+//    print("-> inProgress (\(T.self))")
     status = .inProgress
 
     do {
       let result = try await loader()
+//      print("-> succeed (\(T.self))")
       succeed(with: result)
     } catch {
+//      print("-> fail (\(T.self))")
       fail(with: error)
     }
   }

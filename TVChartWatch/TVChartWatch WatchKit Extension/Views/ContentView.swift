@@ -4,7 +4,7 @@ struct ContentView: View {
   @StateObject var allShows = Loadable<[Show]>()
 
   var body: some View {
-    MainView(shows: allShows)
+    MainView(source: allShows)
       .task {
         guard case .uninitialized = allShows.status else { return }
         await allShows.load {
