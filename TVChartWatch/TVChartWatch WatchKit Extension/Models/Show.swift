@@ -16,8 +16,9 @@ public struct Show {
   }
 
   public func isSeen(season: Int, episodeIndex: Int) -> Bool {
-    if !seasonMaps.indices.contains(season) ||
-        !seasonMaps[season - 1].indices.contains(episodeIndex){
+    let seasonIndex = season - 1
+    if !seasonMaps.indices.contains(seasonIndex) ||
+        !seasonMaps[seasonIndex].indices.contains(episodeIndex){
       return false
     }
     if seenThru.season < season {
