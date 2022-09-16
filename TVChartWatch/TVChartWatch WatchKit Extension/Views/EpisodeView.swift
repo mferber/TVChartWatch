@@ -24,11 +24,12 @@ struct EpisodeView: View {
     .navigationTitle(show.title)
     .task {
       await episodeInfo.load {
+        let seasonIndex = season - 1
         let episodes = try await fetchEpisodesWithCache(show: show)
-        if !episodes.indices.contains(season - 1) || !episodes[season - 1].indices.contains(episodeIndex) {
+        if !episodes.indices.contains(seasonIndex) || !episodes[seasonIndex].indices.contains(episodeIndex) {
           throw TVmazeError.episodeOutOfRange
         }
-        return episodes[season - 1][episodeIndex]
+        return episodes[seasonIndex][episodeIndex]
       }
     }
   }
