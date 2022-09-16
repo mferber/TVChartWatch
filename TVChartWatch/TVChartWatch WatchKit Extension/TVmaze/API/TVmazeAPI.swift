@@ -30,6 +30,7 @@ struct TVmazeAPI {
       while result.count <= ep.season {
         result.append([])
       }
+      let seasonIndex = ep.season - 1
 
       let length: String?
       if let runtime = ep.runtime {
@@ -38,16 +39,23 @@ struct TVmazeAPI {
         length = nil
       }
 
-      result[ep.season - 1].append(
+      result[seasonIndex].append(
         Episode(
           tvmazeId: String(ep.id),
+          season: ep.season,
+          episodeIndex: result[seasonIndex].count,
           number: ep.number,
           title: ep.name,
           length: length,
-          synopsis: ep.summary?.replacingOccurrences(of: "<.*?>", with: "", options: .regularExpression)
+          synopsis: sanitize(synopsis: ep.summary)
         )
       )
     }
     return result
+  }
+
+  private func sanitize(synopsis: String?) -> String? {
+    guard let synopsis = synopsis else { return nil }
+    return synopsis.replacingOccurrences(of: "<.*?>", with: "", options: .regularExpression)
   }
 }

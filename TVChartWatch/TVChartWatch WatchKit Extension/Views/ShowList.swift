@@ -1,7 +1,9 @@
 import SwiftUI
 
 struct ShowList: View {
-  @Binding var shows: [Show]
+  @Binding var shows: [Show] {
+    didSet { print("ShowList.shows updated") }
+  }
 
   var body: some View {
     List {

@@ -41,8 +41,8 @@ struct CodableShow: Decodable {
       length: length,
       seasonMaps: convertedSeasonMaps,
       seasonSeparatorIndices: convertedSeasonSeparatorIndices,
-      seenThru: seenThru,
-      favorite: favorite
+      favorite: favorite,
+      seenThru: seenThru
     )
   }
 

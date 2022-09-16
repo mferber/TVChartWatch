@@ -8,8 +8,8 @@ public struct Show {
   let length: String
   let seasonMaps: [[EpisodeType]]
   let seasonSeparatorIndices: [[Int]]
-  let seenThru: Marker
   let favorite: Bool
+  var seenThru: Marker
 
   public func length(ofSeason season: Int) -> Int {
     return seasonMaps[season - 1].count

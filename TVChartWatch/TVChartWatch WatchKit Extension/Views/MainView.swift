@@ -23,27 +23,37 @@ struct MainView: View {
 }
 
 class MainViewModel: ObservableObject {
-  @Published var shows: [Show]?
+
+  // TODO this is very kludgey, is there a better way?
+  var hasSource = false
+
+  @Published var shows: [Show]? {
+    didSet { print("shows updated") }
+  }
   @Published var error: Error?
 
   var cancellables: Set<AnyCancellable> = []
 
   func drive(from source: Loadable<[Show]>) {
-    source.$status.sink(receiveValue: { [weak self] status in
-      guard let sself = self else { return }
+    if !hasSource {
+      source.$status.sink(receiveValue: { [weak self] status in
+        guard let sself = self else { return }
 
-      switch status {
-        case .success(let value):
-          sself.adopt(receivedShows: value)
-        case .failure(let error):
-          sself.error = error
-        default:
-          break
-      }
-    }).store(in: &cancellables)
+        switch status {
+          case .success(let value):
+            sself.adopt(receivedShows: value)
+          case .failure(let error):
+            sself.error = error
+          default:
+            break
+        }
+      }).store(in: &cancellables)
+    }
+    hasSource = true
   }
 
   func adopt(receivedShows: [Show]) {
+    print("adopting from Loadable")
     shows = receivedShows.filter { $0.favorite }.sortedByTitle()
   }
 }

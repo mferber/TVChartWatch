@@ -15,9 +15,7 @@ struct EpisodeView: View {
     Group {
       switch episodeInfo.status {
         case .uninitialized, .inProgress: ProgressView()
-
-        // TODO: include season in Episode?
-        case .success(let episode): EpisodeDetails(episode: episode, season: season, watched: watched)
+        case .success(let episode): EpisodeDetails(show: $show, episode: episode, watched: watched)
         case .failure(let error): displayError(error)
       }
     }
@@ -64,8 +62,8 @@ struct EpisodeView: View {
 }
 
 private struct EpisodeDetails: View {
+  @Binding var show: Show
   let episode: Episode
-  let season: Int
   let watched: Bool
 
   var body: some View {
@@ -75,12 +73,13 @@ private struct EpisodeDetails: View {
           Text(episode.title).font(.title3)
           Text(episodeDescriptor).font(.footnote)
         }
-        Button(action: { }) {
+
+        Button(action: markLastWatched) {
           HStack {
             if watched {
               Image(systemName: "checkmark")
             }
-            Text("Mark watched")
+            Text("Mark last watched")
           }
         }
 
@@ -110,6 +109,10 @@ private struct EpisodeDetails: View {
       epLength = ""
     }
 
-    return "S\(season)\(epId) \(epLength)"
+    return "S\(episode.season)\(epId) \(epLength)"
+  }
+
+  func markLastWatched() {
+    show.seenThru = Marker(season: episode.season, episodesWatched: episode.episodeIndex + 1)
   }
 }
