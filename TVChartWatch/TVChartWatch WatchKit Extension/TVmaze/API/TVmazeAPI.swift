@@ -4,9 +4,8 @@ struct TVmazeAPI {
   private static let baseURL = URL(string: "https://api.tvmaze.com/")!
 
   func fetchEpisodes(show: Show) async throws -> [[Episode]] {
-    let encodedId = show.tvmazeId.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed)!
     let url = URL(
-      string: "shows/\(encodedId)/episodes?specials=1",
+      string: "shows/\(encodedTvmazeId(show: show))/episodes?specials=1",
       relativeTo: TVmazeAPI.baseURL
     )!
     let (data, rsp) = try await URLSession.shared.data(from: url)
@@ -31,31 +30,38 @@ struct TVmazeAPI {
         result.append([])
       }
       let seasonIndex = ep.season - 1
-
-      let length: String?
-      if let runtime = ep.runtime {
-        length = "\(runtime) min."
-      } else {
-        length = nil
-      }
-
       result[seasonIndex].append(
-        Episode(
-          tvmazeId: String(ep.id),
-          season: ep.season,
-          episodeIndex: result[seasonIndex].count,
-          number: ep.number,
-          title: ep.name,
-          length: length,
-          synopsis: sanitize(synopsis: ep.summary)
-        )
+        constructEpisode(tvmazeEpisode: ep, episodeIndex: result[seasonIndex].count)
       )
     }
     return result
   }
 
+  private func constructEpisode(tvmazeEpisode: TVmazeEpisode, episodeIndex: Int) -> Episode {
+    let length: String?
+    if let runtime = tvmazeEpisode.runtime {
+      length = "\(runtime) min."
+    } else {
+      length = nil
+    }
+
+    return Episode(
+      tvmazeId: String(tvmazeEpisode.id),
+      season: tvmazeEpisode.season,
+      episodeIndex: episodeIndex,
+      number: tvmazeEpisode.number,
+      title: tvmazeEpisode.name,
+      length: length,
+      synopsis: sanitize(synopsis: tvmazeEpisode.summary)
+    )
+  }
+
   private func sanitize(synopsis: String?) -> String? {
     guard let synopsis = synopsis else { return nil }
     return synopsis.replacingOccurrences(of: "<.*?>", with: "", options: .regularExpression)
+  }
+
+  private func encodedTvmazeId(show: Show) -> String {
+    return show.tvmazeId.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed)!
   }
 }
