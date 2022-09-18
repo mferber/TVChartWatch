@@ -113,6 +113,16 @@ private struct EpisodeDetails: View {
   }
 
   func markLastWatched() {
-    show.seenThru = Marker(season: episode.season, episodesWatched: episode.episodeIndex + 1)
+    Task {
+      do {
+        let marker = Marker(season: episode.season, episodesWatched: episode.episodeIndex + 1)
+        let updated = try await API().update(seenThru: marker, for: show)
+        await MainActor.run {
+          show = updated
+        }
+      } catch {
+        print(error)
+      }
+    }
   }
 }

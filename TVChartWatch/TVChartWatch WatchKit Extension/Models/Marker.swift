@@ -1,6 +1,6 @@
 import Foundation
 
-public struct Marker: Decodable {
+public struct Marker: Codable {
   let season: Int
   let episodesWatched: Int
 }

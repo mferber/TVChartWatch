@@ -12,6 +12,25 @@ public struct API {
     guard hrsp.statusCode == 200 else { throw APIError.http(statusCode: hrsp.statusCode)}
     return try JSONDecoder().decode([CodableShow].self, from: data).map { $0.asShow() }
   }
+
+  public func update(seenThru: Marker, for show: Show) async throws -> Show {
+    let idURLStr = String(show.id).addingPercentEncoding(withAllowedCharacters: .urlPathAllowed)!
+    let url = URL(string: "shows/\(idURLStr)", relativeTo: API.baseURL)!  // TODO: encoding
+    var req = URLRequest(url: url)
+
+    req.httpMethod = "PATCH"
+    let body = ["seenThru": seenThru]
+    req.httpBody = try JSONEncoder().encode(body)
+    req.setValue("application/json", forHTTPHeaderField: "Content-Type")
+
+    let (data, rsp) = try await URLSession.shared.data(for: req)
+    guard let hrsp = rsp as? HTTPURLResponse else {
+      throw APIError.general()
+    }
+    guard hrsp.statusCode == 200 else { throw APIError.http(statusCode: hrsp.statusCode)}
+
+    return try JSONDecoder().decode(CodableShow.self, from: data).asShow()
+  }
 }
 
 struct CodableShow: Decodable {

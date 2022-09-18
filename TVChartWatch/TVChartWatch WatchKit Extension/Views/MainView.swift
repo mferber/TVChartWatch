@@ -52,7 +52,7 @@ class MainViewModel: ObservableObject {
     hasSource = true
   }
 
-  func adopt(receivedShows: [Show]) {
+  private func adopt(receivedShows: [Show]) {
     print("adopting from Loadable")
     shows = receivedShows.filter { $0.favorite }.sortedByTitle()
   }
