@@ -1,30 +1,43 @@
 import SwiftUI
 
-// TODO: make this @State and control with digital crown
-private let markerHeight: CGFloat = 22
+let defaultMarkerHeight: CGFloat = 22
+let minMarkerHeight: CGFloat = 8
+let maxMarkerHeight: CGFloat = 44
 
 struct ShowDisplay: View {
   @Binding var show: Show
+  @State var markerHeight: CGFloat = defaultMarkerHeight
 
   var body: some View {
     VStack(alignment: .leading) {
       Text(show.title).font(.title3)
       ScrollView(.vertical, showsIndicators: true) {
         VStack(alignment: .leading, spacing: 10) {
-          EpisodeChart(show: $show)
+          EpisodeChart(show: $show, markerHeight: CGFloat(markerHeight))
         }
       }
     }
+    .focusable()
+    .digitalCrownRotation(
+      $markerHeight,
+      from: minMarkerHeight,
+      through: maxMarkerHeight,
+      by: 0.5,
+      sensitivity: .high,
+      isContinuous: false,
+      isHapticFeedbackEnabled:true
+    )
   }
 }
 
 private struct EpisodeChart: View {
   @Binding var show: Show
+  let markerHeight: CGFloat
 
   var body: some View {
     VStack(alignment: .leading, spacing: markerHeight / 3) {
       ForEach(1...show.seasonMaps.count, id: \.self) { i in
-        Season(show: $show, season: i)
+        Season(show: $show, season: i, markerHeight: markerHeight)
       }
     }
   }
@@ -33,6 +46,7 @@ private struct EpisodeChart: View {
 private struct Season: View {
   @Binding var show: Show
   let season: Int
+  let markerHeight: CGFloat
 
   var body: some View {
     let seasonMap = show.seasonMaps[season - 1]
@@ -56,14 +70,15 @@ private struct Season: View {
         HStack(spacing: markerHeight / 6) {
           ForEach(Array(seasonMap.enumerated()), id: \.offset) { idx, item in
             if separatorIndices.contains(idx) {
-              MidseasonSeparator()
+              MidseasonSeparator(size: markerHeight * 2 / 3)
             }
             EpisodeButton(
               show: $show,
               season: season,
               episodeIndex: idx,
               item: item,
-              text: episodeLabels[idx]
+              text: episodeLabels[idx],
+              markerHeight: markerHeight
             )
           }
         }
@@ -78,29 +93,34 @@ private struct EpisodeButton: View {
   let episodeIndex: Int
   let item: EpisodeType
   let text: String?  // nil indicates an unnumbered special episode
+  let markerHeight: CGFloat
 
   var body: some View {
     NavigationLink(destination: EpisodeView(show: $show, season: season, episodeIndex: episodeIndex)) {
       EpisodeMarker(
         seen: season < show.seenThru.season ||
           (season == show.seenThru.season && episodeIndex + 1 <= show.seenThru.episodesWatched),
-        text: text
+        text: text,
+        markerHeight: markerHeight
       ).frame(width: markerHeight, height: markerHeight)
     }.buttonStyle(.plain)
   }
 }
 
 private struct MidseasonSeparator: View {
+  let size: CGFloat
+
   var body: some View {
     Image(systemName: "plus")
       .foregroundColor(.accentColor)
-      .font(.system(size: markerHeight * 2 / 3, weight: .bold))
+      .font(.system(size: size, weight: .bold))
   }
 }
 
 private struct EpisodeMarker: View {
   let seen: Bool
   let text: String?
+  let markerHeight: CGFloat
 
   var body: some View {
     let markerShape = RoundedRectangle(
